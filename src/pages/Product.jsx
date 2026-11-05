@@ -8,11 +8,6 @@ import {
   Sun,
   Lightbulb,
   Plug,
-  TrendingUp,
-  CheckCircle2,
-  X,
-  Clock,
-  RefreshCw,
 } from 'lucide-react'
 
 import BottomNavbar from '../components/BottomNavbar'
@@ -42,10 +37,6 @@ const getProductIcon = (id) => {
 
 export default function Product() {
   const [toastMessage, setToastMessage] = useState('')
-  const [selectedProduct, setSelectedProduct] = useState(null)
-  const [investSuccess, setInvestSuccess] = useState(false)
-
-
 
   const handleInvest = (product) => {
     setToastMessage('Purchased Successfully!')
@@ -56,8 +47,6 @@ export default function Product() {
   }
 
   return (
-
-
     <div className="min-h-screen bg-gradient-to-b from-emerald-50/50 via-white to-emerald-50/40 text-gray-900 pb-28">
 
       <Notification
@@ -65,25 +54,22 @@ export default function Product() {
         onClose={() => setToastMessage('')}
       />
 
-      {/* Header */}
-      <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-emerald-100 px-4 py-3">
-        <div className="max-w-2xl mx-auto flex items-center justify-between">
+      <main className="max-w-2xl mx-auto px-3 space-y-3">
 
+        {/* Product Title and Back Icon */}
+        <div className="flex items-center gap-2 mb-1">
           <Link
             to="/"
-            className="w-10 h-10 rounded-xl border border-emerald-100 bg-emerald-50 text-emerald-800 flex items-center justify-center"
+            className="w-9 h-9 rounded-xl border border-emerald-100 bg-emerald-50 text-emerald-800 flex items-center justify-center shrink-0"
           >
             <ChevronLeft size={21} />
           </Link>
 
-          <div className="w-10" />
+          <h1 className="text-lg text-center font-bold text-gray-700">
+            Product Center
+          </h1>
         </div>
-      </header>
 
-      <main className="max-w-2xl mx-auto px-3 sm:px-4 pt-4 space-y-4">
-        <p className="text-center text-xl  font-bold text-gray-500 mb-0">
-          Product Center
-        </p>
         {/* Product Cards */}
         {SAMPLE_PRODUCTS.map((product) => {
           const ProductIcon = getProductIcon(product.id)
@@ -96,24 +82,21 @@ export default function Product() {
 
               <div className="flex items-start gap-3 sm:gap-4">
 
-                {/* Product Image - Left Side */}
+                {/* Product Image */}
                 <div className="w-24 h-28 sm:w-32 sm:h-32 shrink-0 rounded-2xl overflow-hidden bg-emerald-50">
-
                   <img
                     src={PRODUCT_IMAGES[product.id]}
                     alt={product.name}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
-
                 </div>
 
-                {/* Product Information - Beside Image */}
+                {/* Product Information */}
                 <div className="flex-1 min-w-0">
 
                   {/* Product Name and Tag */}
                   <div className="flex flex-wrap items-center gap-2">
-
                     <h3 className="text-sm sm:text-base font-extrabold text-gray-900">
                       {product.name}
                     </h3>
@@ -121,10 +104,9 @@ export default function Product() {
                     <span className="text-[9px] sm:text-[10px] font-bold px-2 py-1 rounded-full bg-lime-100 text-green-800">
                       {product.tag}
                     </span>
-
                   </div>
 
-                  {/* Product Description */}
+                  {/* Product Capacity */}
                   <div className="flex items-center gap-1 mt-1 text-xs text-gray-500">
                     <ProductIcon size={13} className="text-emerald-600" />
                     <span>{product.capacity}</span>
@@ -137,7 +119,6 @@ export default function Product() {
                       <p className="text-[9px] sm:text-[10px] text-gray-500">
                         Investment
                       </p>
-
                       <p className="text-xs sm:text-sm font-extrabold text-emerald-800 mt-1">
                         ₦{product.price.toLocaleString()}
                       </p>
@@ -147,7 +128,6 @@ export default function Product() {
                       <p className="text-[9px] sm:text-[10px] text-gray-500">
                         Daily Income
                       </p>
-
                       <p className="text-xs sm:text-sm font-extrabold text-green-600 mt-1">
                         ₦{product.dailyIncome.toLocaleString()}
                       </p>
@@ -157,7 +137,6 @@ export default function Product() {
                       <p className="text-[9px] sm:text-[10px] text-gray-500">
                         Total (60 Days)
                       </p>
-
                       <p className="text-xs sm:text-sm font-extrabold text-emerald-800 mt-1">
                         ₦{product.totalRevenue.toLocaleString()}
                       </p>
@@ -165,9 +144,8 @@ export default function Product() {
 
                   </div>
 
-                  {/* Invest Button */}
+                  {/* Buy Button */}
                   <div className="flex justify-end mt-4">
-
                     <button
                       type="button"
                       onClick={() => handleInvest(product)}
@@ -175,7 +153,6 @@ export default function Product() {
                     >
                       Buy
                     </button>
-
                   </div>
 
                 </div>
@@ -184,12 +161,7 @@ export default function Product() {
           )
         })}
 
-
-
       </main>
-
-
-
 
       <BottomNavbar />
 

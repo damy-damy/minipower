@@ -1,6 +1,6 @@
 ﻿
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   UserRound,
   Lock,
@@ -8,7 +8,6 @@ import {
   EyeOff,
   TrendingUp,
   AlertCircle,
-  CheckCircle2,
 } from 'lucide-react'
 
 import {
@@ -83,15 +82,15 @@ const fadeUpStyle = `
 
 export default function Login() {
   const navigate = useNavigate()
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
   const [errors, setErrors] = useState({})
-  const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  // Validate the entire form
+  // Handle login
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -109,11 +108,10 @@ export default function Login() {
 
     setTimeout(() => {
       setLoading(false)
-      navigate("/dashboard")
+      navigate('/dashboard')
     }, 1500)
   }
 
-  // Validate username when user leaves the field
   const handleUsernameBlur = () => {
     const error = validateUsername(username)
 
@@ -123,7 +121,6 @@ export default function Login() {
     }))
   }
 
-  // Validate password when user leaves the field
   const handlePasswordBlur = () => {
     const error = validatePassword(password)
 
@@ -135,9 +132,7 @@ export default function Login() {
 
   return (
     <>
-
       <style>{fadeUpStyle}</style>
-
 
       <div className="relative isolate overflow-hidden min-h-screen w-full bg-white flex items-center justify-center px-4 py-10">
 
@@ -156,7 +151,7 @@ export default function Login() {
           }}
         >
 
-          {/* Animated glow inside the card */}
+          {/* Animated glow */}
           <div className="card-glow absolute -top-16 -right-16 w-48 h-48 bg-green-300/50 rounded-full blur-3xl pointer-events-none"></div>
 
           <div
@@ -201,7 +196,7 @@ export default function Login() {
             {/* Login form */}
             <form onSubmit={handleSubmit} noValidate className="space-y-5">
 
-              {/* Username field */}
+              {/* Username */}
               <div
                 className="stagger-item"
                 style={{ animationDelay: '0.5s' }}
@@ -218,10 +213,10 @@ export default function Login() {
                     <UserRound
                       size={17}
                       className={`transition-colors duration-200 ${errors.username
-                        ? 'text-red-400'
-                        : username
-                          ? 'text-green-500'
-                          : 'text-gray-400'
+                          ? 'text-red-400'
+                          : username
+                            ? 'text-green-500'
+                            : 'text-gray-400'
                         }`}
                     />
                   </span>
@@ -249,8 +244,8 @@ export default function Login() {
                     }
                     aria-invalid={!!errors.username}
                     className={`w-full pl-10 pr-4 py-3 rounded-xl border text-sm text-gray-800 placeholder:text-gray-400 bg-gray-50 outline-none transition-all duration-200 focus:bg-white focus:shadow-sm ${errors.username
-                      ? 'border-red-400 focus:border-red-400 focus:ring-2 focus:ring-red-100'
-                      : 'border-gray-200 focus:border-green-400 focus:ring-2 focus:ring-green-100'
+                        ? 'border-red-400 focus:border-red-400 focus:ring-2 focus:ring-red-100'
+                        : 'border-gray-200 focus:border-green-400 focus:ring-2 focus:ring-green-100'
                       }`}
                   />
                 </div>
@@ -259,8 +254,8 @@ export default function Login() {
                   id="username-error"
                   role="alert"
                   className={`flex items-center gap-1.5 mt-1.5 text-xs text-red-500 transition-all duration-200 overflow-hidden ${errors.username
-                    ? 'max-h-8 opacity-100'
-                    : 'max-h-0 opacity-0'
+                      ? 'max-h-8 opacity-100'
+                      : 'max-h-0 opacity-0'
                     }`}
                 >
                   <AlertCircle size={13} />
@@ -268,7 +263,7 @@ export default function Login() {
                 </div>
               </div>
 
-              {/* Password field */}
+              {/* Password */}
               <div
                 className="stagger-item"
                 style={{ animationDelay: '0.7s' }}
@@ -285,10 +280,10 @@ export default function Login() {
                     <Lock
                       size={17}
                       className={`transition-colors duration-200 ${errors.password
-                        ? 'text-red-400'
-                        : password
-                          ? 'text-green-500'
-                          : 'text-gray-400'
+                          ? 'text-red-400'
+                          : password
+                            ? 'text-green-500'
+                            : 'text-gray-400'
                         }`}
                     />
                   </span>
@@ -316,8 +311,8 @@ export default function Login() {
                     }
                     aria-invalid={!!errors.password}
                     className={`w-full pl-10 pr-11 py-3 rounded-xl border text-sm text-gray-800 placeholder:text-gray-400 bg-gray-50 outline-none transition-all duration-200 focus:bg-white focus:shadow-sm ${errors.password
-                      ? 'border-red-400 focus:border-red-400 focus:ring-2 focus:ring-red-100'
-                      : 'border-gray-200 focus:border-green-400 focus:ring-2 focus:ring-green-100'
+                        ? 'border-red-400 focus:border-red-400 focus:ring-2 focus:ring-red-100'
+                        : 'border-gray-200 focus:border-green-400 focus:ring-2 focus:ring-green-100'
                       }`}
                   />
 
@@ -341,8 +336,8 @@ export default function Login() {
                   id="password-error"
                   role="alert"
                   className={`flex items-center gap-1.5 mt-1.5 text-xs text-red-500 transition-all duration-200 overflow-hidden ${errors.password
-                    ? 'max-h-8 opacity-100'
-                    : 'max-h-0 opacity-0'
+                      ? 'max-h-8 opacity-100'
+                      : 'max-h-0 opacity-0'
                     }`}
                 >
                   <AlertCircle size={13} />
@@ -423,7 +418,6 @@ export default function Login() {
                         stroke="currentColor"
                         strokeWidth="4"
                       />
-
                       <path
                         className="opacity-75"
                         fill="currentColor"
@@ -460,13 +454,12 @@ export default function Login() {
             >
               {"Don't have an account? "}
 
-              <a
-                href="#register"
-                onClick={(e) => e.preventDefault()}
-                className="text-green-600 font-semibold hover:text-green-700 hover:underline transition-colors duration-150 focus:outline-none focus:underline"
+              <Link
+                to="/register"
+                className="text-green-600 font-semibold hover:text-green-700 hover:underline transition-colors duration-150"
               >
                 Create one for free
-              </a>
+              </Link>
             </p>
 
           </div>

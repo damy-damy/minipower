@@ -1,17 +1,13 @@
 
-
 import { useMemo } from 'react'
-import { Link } from 'react-router-dom'
 import {
   ChevronLeft,
   Users,
   UserPlus,
-  Crown,
   CheckCircle2,
   Lock,
   Wallet,
   TrendingUp,
-  Trophy,
 } from 'lucide-react'
 
 import BottomNavbar from '../components/BottomNavbar'
@@ -51,25 +47,21 @@ export default function Income() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-emerald-50/40 via-white to-emerald-50/30 text-gray-900 pb-28">
 
-      {/* Header */}
-      <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-emerald-100 px-4 py-3">
-        <div className="max-w-md mx-auto flex items-center justify-between">
-          <Link
-            to="/"
-            className="w-9 h-9 rounded-xl border border-emerald-100 bg-emerald-50 text-emerald-800 flex items-center justify-center"
+      <main className="max-w-md mx-auto px-4 pt-4 space-y-4">
+
+        {/* Page Heading */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => window.history.back()}
+            className="w-9 h-9 shrink-0 rounded-xl border border-emerald-100 bg-emerald-50 text-emerald-800 flex items-center justify-center"
           >
             <ChevronLeft size={20} />
-          </Link>
+          </button>
 
           <h1 className="text-base font-bold text-emerald-950">
             VIP Salary Center
           </h1>
-
-          <div className="w-9" />
         </div>
-      </header>
-
-      <main className="max-w-md mx-auto px-4 pt-4 space-y-4">
 
         {/* Current VIP Card */}
         <section className="rounded-3xl bg-gradient-to-br from-emerald-950 via-emerald-800 to-green-700 text-white p-5 shadow-lg">
@@ -86,12 +78,15 @@ export default function Income() {
             </div>
 
             <div className="w-14 h-14 rounded-2xl bg-white/15 flex items-center justify-center">
-              <img src="/mini.png" alt="MiniPower Icon" className="w-9 h-9 object-contain" />
+              <img
+                src="/mini.png"
+                alt="MiniPower Icon"
+                className="w-9 h-9 object-contain"
+              />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3 mt-6 pt-4 border-t border-white/20">
-
             <div>
               <p className="text-[10px] text-emerald-200">
                 Direct Referrals
@@ -109,10 +104,7 @@ export default function Income() {
                 {TOTAL_TEAM}
               </p>
             </div>
-
           </div>
-
-
         </section>
 
         {/* Referral Progress */}
@@ -128,16 +120,14 @@ export default function Income() {
                 <span className="text-gray-500">
                   Next Target: VIP {nextVIP.level}
                 </span>
+
                 <span className="font-bold text-emerald-700">
-                  {Math.min(
-                    DIRECT_REFERRALS / nextVIP.direct,
-                    TOTAL_TEAM / nextVIP.team
-                  ) * 100 >= 100 ? '100%' : `${Math.floor(
+                  {Math.floor(
                     Math.min(
                       DIRECT_REFERRALS / nextVIP.direct,
                       TOTAL_TEAM / nextVIP.team
                     ) * 100
-                  )}%`}
+                  )}%
                 </span>
               </div>
 
@@ -147,10 +137,10 @@ export default function Income() {
                   style={{
                     width: `${Math.min(
                       100,
-                      (Math.min(
+                      Math.min(
                         DIRECT_REFERRALS / nextVIP.direct,
                         TOTAL_TEAM / nextVIP.team
-                      )) * 100
+                      ) * 100
                     )}%`
                   }}
                 />
@@ -185,7 +175,6 @@ export default function Income() {
               You have reached the highest VIP level.
             </p>
           )}
-
         </section>
 
         {/* VIP Levels */}
@@ -195,6 +184,7 @@ export default function Income() {
             <h2 className="text-sm font-bold text-gray-900">
               VIP Levels 1–10
             </h2>
+
             <span className="text-[10px] text-gray-400">
               Qualification requirements
             </span>
@@ -211,10 +201,10 @@ export default function Income() {
               <article
                 key={vip.level}
                 className={`rounded-2xl border p-4 shadow-sm transition-all ${isCurrent
-                  ? 'border-emerald-500 bg-emerald-50'
-                  : qualified
-                    ? 'border-green-200 bg-white'
-                    : 'border-gray-100 bg-white'
+                    ? 'border-emerald-500 bg-emerald-50'
+                    : qualified
+                      ? 'border-green-200 bg-white'
+                      : 'border-gray-100 bg-white'
                   }`}
               >
 
@@ -222,10 +212,14 @@ export default function Income() {
 
                   <div className="flex items-center gap-3">
                     <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${qualified
-                      ? 'bg-emerald-100 text-emerald-700'
-                      : 'bg-gray-100 text-gray-400'
+                        ? 'bg-emerald-100 text-emerald-700'
+                        : 'bg-gray-100 text-gray-400'
                       }`}>
-                      <img src="/mini.png" alt="MiniPower Icon" className="w-10 h-10 object-contain" />
+                      <img
+                        src="/mini.png"
+                        alt="MiniPower Icon"
+                        className="w-10 h-10 object-contain"
+                      />
                     </div>
 
                     <div>
@@ -247,6 +241,7 @@ export default function Income() {
                     <p className="text-[10px] text-gray-400">
                       Demo daily reward
                     </p>
+
                     <p className="text-base font-black text-emerald-700">
                       ₦{vip.salary.toLocaleString()}
                     </p>
@@ -299,7 +294,6 @@ export default function Income() {
               </article>
             )
           })}
-
         </section>
 
         {/* Earnings Summary */}
@@ -332,7 +326,6 @@ export default function Income() {
             </div>
 
           </div>
-
         </section>
 
         <p className="text-[10px] text-gray-400 text-center leading-relaxed px-3">
