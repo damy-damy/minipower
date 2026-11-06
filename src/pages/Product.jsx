@@ -57,7 +57,7 @@ export default function Product() {
       {/* Scrollable Product Content */}
       <main className="flex-1 min-h-0 w-full overflow-y-auto overscroll-contain">
 
-        <div className="max-w-2xl mx-auto w-full px-3 sm:px-4 pt-0  space-y-3">
+        <div className="max-w-2xl mx-auto w-full px-3 sm:px-4 pt-6 pb-20 space-y-3">
 
           {/* Product Title and Back Icon */}
           <div className="flex items-center gap-9">
@@ -69,13 +69,13 @@ export default function Product() {
               <ChevronLeft size={20} />
             </Link>
 
-            <h1 className="text-base sm:text-lg font-bold text-emerald-950">
+            <h1 className=" text-center font-black leading-tight text-[#1a3300] text-[32px]">
               Product Center
             </h1>
 
           </div>
 
-          {/* Product Cards */}
+          {/*  Product Cards */}
           {SAMPLE_PRODUCTS.map((product) => {
             const ProductIcon = getProductIcon(product.id)
 

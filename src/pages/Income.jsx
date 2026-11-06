@@ -328,9 +328,7 @@ export default function Income() {
             </div>
           </section>
 
-          <p className="text-[10px] text-gray-400 text-center px-3 pb-2">
-            VIP requirements and rewards shown are illustrative demo values.
-          </p>
+
 
         </div>
       </main>

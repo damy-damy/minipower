@@ -176,8 +176,8 @@ export default function Mine() {
                 to={item.path}
                 key={item.name}
                 className={`flex items-center justify-between px-4 py-4 hover:bg-green-50 transition ${index !== menuItems.length - 1
-                    ? 'border-b border-gray-100'
-                    : ''
+                  ? 'border-b border-gray-100'
+                  : ''
                   }`}
               >
                 <div className="flex items-center gap-3">
@@ -207,9 +207,7 @@ export default function Mine() {
           Sign Out
         </button>
 
-        <p className="text-center text-[10px] text-gray-400 mt-5">
-          Wallet balances shown are demo values.
-        </p>
+
 
       </div>
 
