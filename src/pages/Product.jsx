@@ -47,7 +47,7 @@ export default function Product() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-50/50 via-white to-emerald-50/40 text-gray-900 pb-28">
+    <div className="h-dvh bg-gradient-to-b  bg-[#f0fdf4]  text-gray-900 pb-28">
 
       <Notification
         message={toastMessage}
@@ -57,15 +57,15 @@ export default function Product() {
       <main className="max-w-2xl mx-auto px-3 space-y-3">
 
         {/* Product Title and Back Icon */}
-        <div className="flex items-center gap-2 mb-1">
+        <div className="flex items-center gap-16 -mb-3">
           <Link
             to="/"
-            className="w-9 h-9 rounded-xl border border-emerald-100 bg-emerald-50 text-emerald-800 flex items-center justify-center shrink-0"
+            className=" text-emerald-800 flex items-center justify-center shrink-0"
           >
             <ChevronLeft size={21} />
           </Link>
 
-          <h1 className="text-lg text-center font-bold text-gray-700">
+          <h1 className="text-sm text-center font-bold text-gray-700">
             Product Center
           </h1>
         </div>
