@@ -204,10 +204,10 @@ export default function Income() {
                 <article
                   key={vip.level}
                   className={`rounded-2xl border p-4 shadow-sm transition-all ${isCurrent
-                      ? 'border-emerald-500 bg-emerald-50'
-                      : qualified
-                        ? 'border-green-200 bg-white'
-                        : 'border-gray-100 bg-white'
+                    ? 'border-emerald-500 bg-emerald-50'
+                    : qualified
+                      ? 'border-green-200 bg-white'
+                      : 'border-gray-100 bg-white'
                     }`}
                 >
 
@@ -216,8 +216,8 @@ export default function Income() {
                     <div className="flex items-center gap-3">
                       <div
                         className={`w-11 h-11 rounded-xl flex items-center justify-center ${qualified
-                            ? 'bg-emerald-100 text-emerald-700'
-                            : 'bg-gray-100 text-gray-400'
+                          ? 'bg-emerald-100 text-emerald-700'
+                          : 'bg-gray-100 text-gray-400'
                           }`}
                       >
                         <img
