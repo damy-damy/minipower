@@ -4,14 +4,11 @@ import {
   Headphones,
   Link2,
   Wallet,
-  Landmark,
   Gift,
-  Users,
   Volume2,
   ShieldCheck,
   ArrowRight,
   CheckCircle2,
-  Info,
   X,
 } from 'lucide-react'
 
@@ -25,22 +22,12 @@ export default function Home() {
 
   // State for interactive modals and toasts
   const [toastMessage, setToastMessage] = useState('')
-  const [showRechargeModal, setShowRechargeModal] = useState(false)
-  const [showWithdrawModal, setShowWithdrawModal] = useState(false)
   const [showCouponModal, setShowCouponModal] = useState(false)
   const [showAboutModal, setShowAboutModal] = useState(false)
 
   // Demo coupon state
   const [couponCode, setCouponCode] = useState('')
   const [couponFeedback, setCouponFeedback] = useState(null)
-
-  // Demo withdrawal state
-  const [withdrawAmount, setWithdrawAmount] = useState('')
-  const [withdrawFeedback, setWithdrawFeedback] = useState('')
-
-  // Demo recharge state
-  const [selectedRecharge, setSelectedRecharge] = useState('10000')
-  const [rechargeFeedback, setRechargeFeedback] = useState('')
 
   // Copy Referral Link action
   const handleCopyLink = async () => {
@@ -99,46 +86,6 @@ export default function Home() {
         message: 'Invalid or expired code. Try using demo code: NOVA2026',
       })
     }
-  }
-
-  // Handle Withdraw submission
-  const handleWithdrawSubmit = (e) => {
-    e.preventDefault()
-
-    if (!withdrawAmount || Number(withdrawAmount) < 1000) {
-      setWithdrawFeedback('Minimum withdrawal amount is ₦1,000 (Demo).')
-      return
-    }
-
-    setWithdrawFeedback(
-      'Withdrawal request received for processing (Demo mode).'
-    )
-
-    setTimeout(() => {
-      setShowWithdrawModal(false)
-      setWithdrawFeedback('')
-      setWithdrawAmount('')
-      setToastMessage('Withdrawal request simulated successfully!')
-      setTimeout(() => setToastMessage(''), 3000)
-    }, 1500)
-  }
-
-  // Handle Recharge submission
-  const handleRechargeSubmit = (e) => {
-    e.preventDefault()
-
-    setRechargeFeedback(
-      `Deposit order for ₦${Number(selectedRecharge).toLocaleString()} created (Demo mode).`
-    )
-
-    setTimeout(() => {
-      setShowRechargeModal(false)
-      setRechargeFeedback('')
-      setToastMessage(
-        `Simulated deposit of ₦${Number(selectedRecharge).toLocaleString()}!`
-      )
-      setTimeout(() => setToastMessage(''), 3000)
-    }, 1500)
   }
 
   return (
@@ -204,7 +151,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 2. Six Quick-Action Icons */}
+        {/* 2. Three Quick-Action Icons */}
         <section aria-label="Quick Actions">
           <div className="flex items-center justify-between mb-3 px-1">
             <h2 className="text-sm font-bold text-gray-900 tracking-tight">
@@ -212,12 +159,11 @@ export default function Home() {
             </h2>
 
             <span className="text-[11px] text-gray-400 font-medium">
-              6 Services
+              3 Services
             </span>
           </div>
 
           <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
-
             <DashboardCard
               icon={Headphones}
               title="Customer Service"
@@ -236,36 +182,12 @@ export default function Home() {
             />
 
             <DashboardCard
-              icon={Wallet}
-              title="Recharge"
-              onClick={() => setShowRechargeModal(true)}
-              bgColor="bg-green-500/10"
-              iconColor="text-green-700"
-            />
-
-            <DashboardCard
-              icon={Landmark}
-              title="Withdrawal"
-              onClick={() => setShowWithdrawModal(true)}
-              bgColor="bg-emerald-500/10"
-              iconColor="text-emerald-700"
-            />
-
-            <DashboardCard
               icon={Gift}
               title="Redeem Coupon"
               onClick={() => setShowCouponModal(true)}
               badge="Bonus"
               bgColor="bg-amber-500/10"
               iconColor="text-amber-700"
-            />
-
-            <DashboardCard
-              icon={Users}
-              title="My Team"
-              to="/team"
-              bgColor="bg-emerald-500/10"
-              iconColor="text-emerald-700"
             />
           </div>
         </section>
@@ -384,174 +306,6 @@ export default function Home() {
 
       {/* 5. Modals */}
 
-      {/* Modal: Recharge */}
-      {showRechargeModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs animate-in fade-in duration-150">
-          <div className="w-full max-w-sm rounded-3xl bg-white border border-gray-100 p-5 sm:p-6 shadow-2xl relative">
-
-            <button
-              type="button"
-              onClick={() => setShowRechargeModal(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-              aria-label="Close recharge modal"
-            >
-              <X size={18} />
-            </button>
-
-            <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
-                <Wallet size={20} />
-              </div>
-
-              <div>
-                <h3 className="text-base font-bold text-gray-900">
-                  Recharge Account
-                </h3>
-                <span className="text-[11px] text-gray-400">
-                  Select deposit amount (Demo)
-                </span>
-              </div>
-            </div>
-
-            <form onSubmit={handleRechargeSubmit} className="space-y-4">
-              <div>
-                <label className="text-xs font-semibold text-gray-700 block mb-2">
-                  Choose Amount:
-                </label>
-
-                <div className="grid grid-cols-3 gap-2">
-                  {['5000', '10000', '20000', '50000', '100000', '200000'].map((amt) => (
-                    <button
-                      key={amt}
-                      type="button"
-                      onClick={() => setSelectedRecharge(amt)}
-                      className={`py-2 px-1 text-xs rounded-xl font-bold border transition-all ${selectedRecharge === amt
-                          ? 'border-emerald-500 bg-emerald-50 text-emerald-800 ring-2 ring-emerald-100'
-                          : 'border-gray-200 bg-gray-50 text-gray-700 hover:bg-gray-100'
-                        }`}
-                    >
-                      ₦{Number(amt).toLocaleString()}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="p-3 rounded-xl bg-emerald-50/70 border border-emerald-100 text-[11px] text-emerald-800">
-                <p className="flex items-center gap-1.5 font-semibold mb-1">
-                  <Info size={14} className="text-emerald-600" />
-                  Frontend Demonstration Mode
-                </p>
-
-                <p className="text-gray-600 leading-relaxed">
-                  No real bank charge will occur. Clicking submit simulates a
-                  successful deposit for testing.
-                </p>
-              </div>
-
-              {rechargeFeedback && (
-                <p className="text-xs text-green-600 font-semibold text-center">
-                  {rechargeFeedback}
-                </p>
-              )}
-
-              <button
-                type="submit"
-                className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md shadow-emerald-600/20 active:scale-95 transition-all"
-              >
-                Proceed with Demo Recharge
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* Modal: Withdrawal */}
-      {showWithdrawModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs animate-in fade-in duration-150">
-          <div className="w-full max-w-sm rounded-3xl bg-white border border-gray-100 p-5 sm:p-6 shadow-2xl relative">
-
-            <button
-              type="button"
-              onClick={() => setShowWithdrawModal(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-              aria-label="Close withdrawal modal"
-            >
-              <X size={18} />
-            </button>
-
-            <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
-                <Landmark size={20} />
-              </div>
-
-              <div>
-                <h3 className="text-base font-bold text-gray-900">
-                  Withdraw Funds
-                </h3>
-
-                <span className="text-[11px] text-gray-400">
-                  Available: ₦{USER_PROFILE.accountBalance.toLocaleString()}
-                </span>
-              </div>
-            </div>
-
-            <form onSubmit={handleWithdrawSubmit} className="space-y-3.5">
-              <div>
-                <label
-                  htmlFor="withdraw-amount-input"
-                  className="text-xs font-semibold text-gray-700 block mb-1"
-                >
-                  Withdrawal Amount (₦)
-                </label>
-
-                <input
-                  id="withdraw-amount-input"
-                  type="number"
-                  min="1000"
-                  placeholder="Min ₦1,000"
-                  value={withdrawAmount}
-                  onChange={(e) => setWithdrawAmount(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
-                />
-              </div>
-
-              <div>
-                <label className="text-xs font-semibold text-gray-700 block mb-1">
-                  Recipient Bank Account (Demo)
-                </label>
-
-                <div className="p-2.5 rounded-xl bg-gray-50 border border-gray-200 text-xs text-gray-700 space-y-0.5">
-                  <p className="font-semibold text-gray-900">
-                    Access Bank / FirstBank
-                  </p>
-                  <p className="text-gray-500 font-mono">
-                    012****890 — Alex Morgan
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 text-[11px] text-gray-600">
-                This frontend demo showcases the withdrawal interface. No
-                real withdrawal is processed.
-              </div>
-
-              {withdrawFeedback && (
-                <p className="text-xs text-emerald-700 font-semibold text-center">
-                  {withdrawFeedback}
-                </p>
-              )}
-
-              <button
-                type="submit"
-                className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md shadow-emerald-600/20 active:scale-95 transition-all"
-              >
-                Submit Withdrawal Request
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
-
       {/* Modal: Redeem Coupon */}
       {showCouponModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs animate-in fade-in duration-150">
@@ -617,8 +371,8 @@ export default function Home() {
               {couponFeedback && (
                 <div
                   className={`p-3 rounded-xl text-xs font-medium ${couponFeedback.type === 'success'
-                      ? 'bg-green-50 text-green-800 border border-green-200'
-                      : 'bg-red-50 text-red-700 border border-red-200'
+                    ? 'bg-green-50 text-green-800 border border-green-200'
+                    : 'bg-red-50 text-red-700 border border-red-200'
                     }`}
                 >
                   {couponFeedback.message}

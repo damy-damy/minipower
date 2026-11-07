@@ -7,11 +7,10 @@ import {
   Crown,
   ArrowDownToLine,
   ArrowUpFromLine,
-  Headset,
-  CreditCard,
-  History,
-  ChevronRight,
-  Settings,
+  Package,
+  ShieldCheck,
+  Gift,
+  Users,
   LogOut,
   X,
 } from 'lucide-react'
@@ -50,11 +49,12 @@ export default function Mine() {
   }
 
   const menuItems = [
-    { name: 'Customer Service', icon: Headset, path: '/support' },
-    { name: 'Bind Bank Card', icon: CreditCard, path: '/bind-bank' },
-    { name: 'Recharge Record', icon: History, path: '/recharge-record' },
-    { name: 'Withdrawal Record', icon: History, path: '/withdrawal-record' },
-    { name: 'Other Services', icon: Settings, path: '/settings' },
+    { name: 'My Order', icon: Package, path: '/my-orders' },
+    { name: 'Deposit Record', icon: ArrowDownToLine, path: '/deposit-record' },
+    { name: 'Withdrawal Record', icon: ArrowUpFromLine, path: '/withdrawal-record' },
+    { name: 'Security Center', icon: ShieldCheck, path: '/security' },
+    { name: 'Activities', icon: Gift, path: '/activities' },
+    { name: 'Team Management', icon: Users, path: '/team' },
   ]
 
   return (
@@ -62,62 +62,76 @@ export default function Mine() {
 
       <div className="max-w-md mx-auto px-5 pt-7">
 
-        {/* Profile */}
-        <div className="flex items-center gap-3 mb-7">
+        {/* Profile Section - Gradient Design */}
+        <div className="relative mb-7 overflow-hidden rounded-2xl bg-gradient-to-br from-green-700 via-emerald-600 to-green-400 p-4 text-white shadow-lg shadow-green-200/60 animate-in fade-in slide-in-from-top-3 duration-700">
 
-          <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-green-200 bg-green-50 flex items-center justify-center shrink-0">
-            <img
-              src="/mini.png"
-              alt="MiniPower Logo"
-              className="w-full h-full object-contain p-2"
-            />
-          </div>
+          {/* Decorative Gradient Orbs */}
+          <div className="absolute -right-8 -top-10 h-32 w-32 rounded-full bg-white/10 blur-2xl animate-pulse" />
+          <div className="absolute -bottom-12 left-20 h-28 w-28 rounded-full bg-lime-200/20 blur-2xl" />
 
-          <div className="flex-1 min-w-0">
-            <h1 className="text-xl font-bold text-gray-900 truncate">
-              {USER_PROFILE.name}
-            </h1>
+          <div className="relative flex items-center gap-3">
 
-            <div className="flex items-center gap-2 mt-1">
-              <span className="text-xs text-gray-500">
-                User ID: {userId}
-              </span>
-
-              <button
-                type="button"
-                onClick={() => copyText(userId, 'id')}
-                className="text-green-700"
-              >
-                {copied === 'id' ? <Check size={14} /> : <Copy size={14} />}
-              </button>
+            {/* Logo */}
+            <div className="h-16 w-16 shrink-0 overflow-hidden rounded-2xl border border-white/30 bg-white/15 p-2 backdrop-blur-sm">
+              <img
+                src="/mini.png"
+                alt="MiniPower Logo"
+                className="h-full w-full object-contain"
+              />
             </div>
 
-            <div className="flex items-center gap-2 mt-1">
-              <span className="text-xs text-gray-500">
-                Invitation Code: {invitationCode}
-              </span>
+            {/* Account Details */}
+            <div className="min-w-0 flex-1">
 
-              <button
-                type="button"
-                onClick={() => copyText(invitationCode, 'invite')}
-                className="text-green-700"
-              >
-                {copied === 'invite' ? <Check size={14} /> : <Copy size={14} />}
-              </button>
+              {/* Username and VIP */}
+              <div className="mb-2 flex items-center justify-between gap-2">
+                <h1 className="truncate text-base font-bold text-white">
+                  {USER_PROFILE.name}
+                </h1>
+
+                <div className="flex shrink-0 items-center gap-1 rounded-full border border-yellow-200/40 bg-yellow-300/20 px-2.5 py-1 backdrop-blur-sm">
+                  <Crown size={13} className="text-yellow-200" />
+                  <span className="text-[11px] font-bold text-yellow-100">
+                    VIP
+                  </span>
+                </div>
+              </div>
+
+              {/* User ID */}
+              <div className="mb-2 flex items-center justify-between gap-2">
+                <span className="truncate text-xs text-white/85">
+                  User ID: {userId}
+                </span>
+
+                <button
+                  type="button"
+                  onClick={() => copyText(userId, 'id')}
+                  className="shrink-0 text-white hover:text-yellow-200 transition"
+                >
+                  {copied === 'id' ? <Check size={14} /> : <Copy size={14} />}
+                </button>
+              </div>
+
+              {/* Invitation Code */}
+              <div className="flex items-center justify-between gap-2">
+                <span className="truncate text-xs text-white/85">
+                  Invitation Code: {invitationCode}
+                </span>
+
+                <button
+                  type="button"
+                  onClick={() => copyText(invitationCode, 'invite')}
+                  className="shrink-0 text-white hover:text-yellow-200 transition"
+                >
+                  {copied === 'invite' ? <Check size={14} /> : <Copy size={14} />}
+                </button>
+              </div>
+
             </div>
-          </div>
-
-          <div className="flex items-center gap-1 bg-green-50 border border-green-200 rounded-full px-3 py-1.5">
-            <Crown size={14} className="text-green-700" />
-            <span className="text-xs font-bold text-green-700">VIP</span>
           </div>
         </div>
 
-        {/* Wallet Heading */}
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-bold text-gray-900">My Wallets</h2>
-          <span className="text-xs text-green-700 font-medium">NGN (₦)</span>
-        </div>
+
 
         {/* Wallets */}
         <div className="grid grid-cols-2 gap-3 mb-5">
@@ -165,103 +179,39 @@ export default function Mine() {
 
         </div>
 
-        {/* Account Menu */}
-        <div className="bg-white rounded-2xl shadow-sm border border-green-100 overflow-hidden">
+        {/* Account Menu - Six Cards */}
+        <div className="grid grid-cols-3 gap-3">
 
-          {menuItems.map((item, index) => {
+          {menuItems.map((item) => {
             const Icon = item.icon
 
             return (
               <Link
                 to={item.path}
                 key={item.name}
-                className={`flex items-center justify-between px-4 py-4 hover:bg-green-50 transition ${index !== menuItems.length - 1
-                  ? 'border-b border-gray-100'
-                  : ''
-                  }`}
+                className="min-h-[110px] bg-white rounded-3xl border border-green-100 shadow-sm flex flex-col items-center justify-center gap-3 p-1 hover:bg-green-50 hover:shadow-md transition-all active:scale-95"
               >
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-green-50 flex items-center justify-center">
-                    <Icon size={19} className="text-green-700" />
-                  </div>
-
-                  <span className="text-sm font-semibold text-gray-700">
-                    {item.name}
-                  </span>
+                <div className="w-12 h-12 rounded-2xl bg-green-50 flex items-center justify-center">
+                  <Icon
+                    size={29}
+                    strokeWidth={1.8}
+                    className="text-green-600"
+                  />
                 </div>
 
-                <ChevronRight size={18} className="text-gray-400" />
+                <span className="text-xs font-bold text-gray-700 text-center leading-tight">
+                  {item.name}
+                </span>
               </Link>
             )
           })}
 
         </div>
 
-        {/* Sign Out */}
-        <button
-          type="button"
-          onClick={() => setShowLogout(true)}
-          className="w-full mt-5 h-12 rounded-xl bg-white border border-red-100 text-red-600 font-bold flex items-center justify-center gap-2 hover:bg-red-50 transition"
-        >
-          <LogOut size={18} />
-          Sign Out
-        </button>
-
 
 
       </div>
 
-      {/* Sign Out Confirmation */}
-      {showLogout && (
-        <div className="fixed inset-0 z-[100] bg-black/50 flex items-center justify-center px-5">
-
-          <div className="w-full max-w-sm bg-white rounded-2xl p-6 shadow-2xl">
-
-            <div className="flex justify-end">
-              <button
-                type="button"
-                onClick={() => setShowLogout(false)}
-                className="text-gray-400 hover:text-gray-700"
-              >
-                <X size={21} />
-              </button>
-            </div>
-
-            <div className="w-14 h-14 rounded-full bg-red-50 text-red-600 flex items-center justify-center mx-auto">
-              <LogOut size={25} />
-            </div>
-
-            <h2 className="text-lg font-bold text-gray-900 text-center mt-4">
-              Sign Out?
-            </h2>
-
-            <p className="text-sm text-gray-500 text-center mt-2">
-              Are you sure you want to sign out of your MiniPower account?
-            </p>
-
-            <div className="grid grid-cols-2 gap-3 mt-6">
-
-              <button
-                type="button"
-                onClick={() => setShowLogout(false)}
-                className="h-11 rounded-xl border border-gray-200 text-gray-700 font-semibold"
-              >
-                Cancel
-              </button>
-
-              <button
-                type="button"
-                onClick={handleSignOut}
-                className="h-11 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition"
-              >
-                Sign Out
-              </button>
-
-            </div>
-
-          </div>
-        </div>
-      )}
 
       <BottomNavbar />
 

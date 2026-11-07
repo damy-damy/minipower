@@ -99,9 +99,6 @@ export const TEAM_DATA = {
   todayCommission: 850,
 }
 
-// Sample team members for the My Team page
-// Demo usernames only — replace with real backend data later.
-
 export const TEAM_MEMBERS = [
   // Level 1: Direct referrals
   { id: 1, username: 'john_smith', level: 1 },

@@ -1,8 +1,7 @@
 
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import {
-  ChevronLeft,
+
   BatteryCharging,
   BatteryFull,
   Sun,
@@ -60,14 +59,7 @@ export default function Product() {
         <div className="max-w-2xl mx-auto w-full px-3 sm:px-4 pt-6 pb-20 space-y-3">
 
           {/* Product Title and Back Icon */}
-          <div className="flex items-center gap-9">
-
-            <Link
-              to="/"
-              className="w-9 h-9 shrink-0 rounded-xl border border-emerald-100 bg-emerald-50 text-emerald-800 flex items-center justify-center"
-            >
-              <ChevronLeft size={20} />
-            </Link>
+          <div className="flex items-center px-12">
 
             <h1 className=" text-center font-black leading-tight text-[#1a3300] text-[32px]">
               Product Center

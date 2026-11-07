@@ -66,6 +66,17 @@ const fadeUpStyle = `
     animation: cardGlow 8s ease-in-out infinite;
   }
 
+  @keyframes popIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .login-card,
     .stagger-item,
@@ -90,7 +101,6 @@ export default function Login() {
   const [errors, setErrors] = useState({})
   const [loading, setLoading] = useState(false)
 
-  // Handle login
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -109,7 +119,7 @@ export default function Login() {
     setTimeout(() => {
       setLoading(false)
       navigate('/dashboard')
-    }, 1500)
+    }, 5000)
   }
 
   const handleUsernameBlur = () => {
@@ -136,28 +146,28 @@ export default function Login() {
 
       <div className="relative isolate overflow-hidden min-h-screen w-full bg-white flex items-center justify-center px-4 py-10">
 
-        {/* Animated background circles */}
-        <div className="orb-one absolute top-10 left-10 w-64 h-64 bg-green-300/40 rounded-full blur-3xl pointer-events-none"></div>
+        {/* Animated background */}
+        <div className="orb-one absolute top-10 left-10 w-64 h-64 bg-green-300/40 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="orb-two absolute bottom-10 right-10 w-72 h-72 bg-emerald-300/40 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="orb-two absolute bottom-10 right-10 w-72 h-72 bg-emerald-300/40 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="orb-three absolute top-1/2 right-1/3 w-48 h-48 bg-green-200/40 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="orb-three absolute top-1/2 right-1/3 w-48 h-48 bg-green-200/40 rounded-full blur-3xl pointer-events-none" />
 
         {/* Login card */}
         <div
-          className="relative isolate overflow-hidden z-10 login-card w-full max-w-md bg-white/90 backdrop-blur-xl border border-gray-100 rounded-3xl shadow-2xl shadow-gray-200/60 px-6 py-8 sm:px-10 sm:py-10"
+          className="relative isolate overflow-hidden z-10 login-card w-full max-w-md bg-white border border-gray-100 rounded-3xl shadow-2xl shadow-gray-200/60 px-6 py-8 sm:px-10 sm:py-10"
           style={{
             animation: 'fadeUp 0.45s cubic-bezier(0.16,1,0.3,1) both',
           }}
         >
 
           {/* Animated glow */}
-          <div className="card-glow absolute -top-16 -right-16 w-48 h-48 bg-green-300/50 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="card-glow absolute -top-16 -right-16 w-48 h-48 bg-green-300/50 rounded-full blur-3xl pointer-events-none" />
 
           <div
             className="card-glow absolute -bottom-16 -left-16 w-48 h-48 bg-emerald-300/50 rounded-full blur-3xl pointer-events-none"
             style={{ animationDelay: '3s' }}
-          ></div>
+          />
 
           <div className="relative z-10">
 
@@ -167,11 +177,7 @@ export default function Login() {
               style={{ animationDelay: '0.1s' }}
             >
               <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-green-500 shadow-md shadow-green-200 mb-4">
-                <TrendingUp
-                  size={28}
-                  className="text-white"
-                  strokeWidth={2.5}
-                />
+                <TrendingUp size={28} className="text-white" strokeWidth={2.5} />
               </div>
 
               <span className="text-xl font-bold tracking-widest text-green-600 uppercase">
@@ -194,7 +200,11 @@ export default function Login() {
             </div>
 
             {/* Login form */}
-            <form onSubmit={handleSubmit} noValidate className="space-y-5">
+            <form
+              onSubmit={handleSubmit}
+              noValidate
+              className="relative space-y-5"
+            >
 
               {/* Username */}
               <div
@@ -239,9 +249,6 @@ export default function Login() {
                       }
                     }}
                     onBlur={handleUsernameBlur}
-                    aria-describedby={
-                      errors.username ? 'username-error' : undefined
-                    }
                     aria-invalid={!!errors.username}
                     className={`w-full pl-10 pr-4 py-3 rounded-xl border text-sm text-gray-800 placeholder:text-gray-400 bg-gray-50 outline-none transition-all duration-200 focus:bg-white focus:shadow-sm ${errors.username
                         ? 'border-red-400 focus:border-red-400 focus:ring-2 focus:ring-red-100'
@@ -251,7 +258,6 @@ export default function Login() {
                 </div>
 
                 <div
-                  id="username-error"
                   role="alert"
                   className={`flex items-center gap-1.5 mt-1.5 text-xs text-red-500 transition-all duration-200 overflow-hidden ${errors.username
                       ? 'max-h-8 opacity-100'
@@ -306,9 +312,6 @@ export default function Login() {
                       }
                     }}
                     onBlur={handlePasswordBlur}
-                    aria-describedby={
-                      errors.password ? 'password-error' : undefined
-                    }
                     aria-invalid={!!errors.password}
                     className={`w-full pl-10 pr-11 py-3 rounded-xl border text-sm text-gray-800 placeholder:text-gray-400 bg-gray-50 outline-none transition-all duration-200 focus:bg-white focus:shadow-sm ${errors.password
                         ? 'border-red-400 focus:border-red-400 focus:ring-2 focus:ring-red-100'
@@ -319,21 +322,14 @@ export default function Login() {
                   <button
                     type="button"
                     onClick={() => setShowPassword((v) => !v)}
-                    aria-label={
-                      showPassword ? 'Hide password' : 'Show password'
-                    }
-                    className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-gray-400 hover:text-green-500 transition-colors duration-150 focus:outline-none"
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-gray-400 hover:text-green-500 transition-colors duration-150"
                   >
-                    {showPassword ? (
-                      <EyeOff size={17} />
-                    ) : (
-                      <Eye size={17} />
-                    )}
+                    {showPassword ? <EyeOff size={17} /> : <Eye size={17} />}
                   </button>
                 </div>
 
                 <div
-                  id="password-error"
                   role="alert"
                   className={`flex items-center gap-1.5 mt-1.5 text-xs text-red-500 transition-all duration-200 overflow-hidden ${errors.password
                       ? 'max-h-8 opacity-100'
@@ -345,41 +341,20 @@ export default function Login() {
                 </div>
               </div>
 
-              {/* Remember me and forgot password */}
+              {/* Remember me */}
               <div
                 className="stagger-item flex items-center justify-between pt-1"
                 style={{ animationDelay: '0.9s' }}
               >
                 <label className="flex items-center gap-2 cursor-pointer select-none group">
-                  <div className="relative flex items-center">
-                    <input
-                      id="remember-me"
-                      type="checkbox"
-                      checked={rememberMe}
-                      onChange={(e) => setRememberMe(e.target.checked)}
-                      className="sr-only peer"
-                    />
+                  <input
+                    type="checkbox"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                    className="w-4 h-4 accent-green-500"
+                  />
 
-                    <div className="w-4 h-4 rounded border border-gray-300 bg-gray-50 flex items-center justify-center peer-checked:bg-green-500 peer-checked:border-green-500 transition-colors duration-200 peer-focus:ring-2 peer-focus:ring-green-100">
-                      {rememberMe && (
-                        <svg
-                          className="w-2.5 h-2.5 text-white"
-                          fill="none"
-                          viewBox="0 0 10 8"
-                        >
-                          <path
-                            d="M1 4l2.5 2.5L9 1"
-                            stroke="currentColor"
-                            strokeWidth="1.8"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      )}
-                    </div>
-                  </div>
-
-                  <span className="text-sm text-gray-600 group-hover:text-gray-800 transition-colors duration-150">
+                  <span className="text-sm text-gray-600 group-hover:text-gray-800 transition-colors">
                     Remember me
                   </span>
                 </label>
@@ -387,11 +362,32 @@ export default function Login() {
                 <a
                   href="#forgot-password"
                   onClick={(e) => e.preventDefault()}
-                  className="text-sm text-green-600 font-medium hover:text-green-700 hover:underline transition-colors duration-150 focus:outline-none focus:underline"
+                  className="text-sm text-green-600 font-medium hover:text-green-700 hover:underline"
                 >
                   Forgot password?
                 </a>
               </div>
+
+              {/* Loading box: stays inside form without taking space */}
+              {loading && (
+                <div className="absolute inset-0 z-50 flex items-center justify-center pointer-events-none">
+                  <div className="relative flex flex-col items-center justify-center gap-2 w-24 h-24 shrink-0 overflow-hidden rounded-2xl border border-green-200 bg-gradient-to-br from-white via-green-50 to-emerald-100 shadow-xl shadow-green-200/50 animate-[popIn_0.35s_ease-out]">
+
+                    <div className="absolute inset-0 bg-green-200/30 animate-pulse rounded-2xl" />
+
+                    <img
+                      src="/mini.png"
+                      alt="MiniPower"
+                      className="relative z-10 w-9 h-9 object-contain animate-pulse"
+                    />
+
+                    <p className="relative z-10 text-xs font-semibold text-green-600">
+                      Loading...
+                    </p>
+
+                  </div>
+                </div>
+              )}
 
               {/* Sign in button */}
               <button
@@ -399,38 +395,11 @@ export default function Login() {
                 type="submit"
                 disabled={loading}
                 style={{ animationDelay: '1.1s' }}
-                className="stagger-item w-full py-3.5 rounded-xl text-white font-semibold text-sm tracking-wide bg-green-500 hover:bg-green-600 active:scale-[0.98] shadow-md shadow-green-200 hover:shadow-green-300 transition-all duration-200 mt-2 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed disabled:active:scale-100"
+                className="stagger-item w-full py-3.5 rounded-xl text-white font-semibold text-sm tracking-wide bg-green-500 hover:bg-green-600 active:scale-[0.98] shadow-md shadow-green-200 hover:shadow-green-300 transition-all duration-200 mt-2 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                {loading ? (
-                  <span className="flex items-center justify-center gap-2">
-                    <svg
-                      className="animate-spin h-4 w-4 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      />
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8v8H4z"
-                      />
-                    </svg>
-
-                    Signing in...
-                  </span>
-                ) : (
-                  'Sign In'
-                )}
+                Sign In
               </button>
+
             </form>
 
             {/* Divider */}
@@ -452,11 +421,11 @@ export default function Login() {
               className="stagger-item text-center text-sm text-gray-500"
               style={{ animationDelay: '1.3s' }}
             >
-              {"Don't have an account? "}
+              Don't have an account?{' '}
 
               <Link
                 to="/register"
-                className="text-green-600 font-semibold hover:text-green-700 hover:underline transition-colors duration-150"
+                className="text-green-600 font-semibold hover:text-green-700 hover:underline"
               >
                 Create one for free
               </Link>

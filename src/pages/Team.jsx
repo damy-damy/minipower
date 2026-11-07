@@ -93,13 +93,6 @@ export default function Team() {
       <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-emerald-100/80 px-4 py-3">
         <div className="max-w-md mx-auto flex items-center justify-between">
 
-          <Link
-            to="/"
-            className="w-9 h-9 rounded-xl border border-emerald-100 bg-emerald-50/60 text-emerald-800 flex items-center justify-center active:scale-95 transition-all"
-          >
-            <ChevronLeft size={20} />
-          </Link>
-
           <div className="w-9" />
 
         </div>

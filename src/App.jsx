@@ -16,6 +16,9 @@ import Support from './pages/Support'
 import Notifications from './pages/Notifications'
 import TermsAndCondition from './pages/termsAndCondition'
 import MyTeam from './pages/MyTeam'
+import Security from './pages/security'
+import ResetFundPassword from './pages/ResetFundPassword'
+import ChangeLoginPassword from './pages/ChangeLoginPassword'
 
 function App() {
   return (
@@ -39,6 +42,9 @@ function App() {
         <Route path="/mine" element={<Mine />} />
         <Route path="/support" element={<Support />} />
         <Route path="/notifications" element={<Notifications />} />
+        <Route path="/security" element={<Security />} />
+        <Route path="/reset-fund-password" element={<ResetFundPassword />} />
+        <Route path="/change-login-password" element={<ChangeLoginPassword />} />
 
         {/* Fallback */}
         <Route path="*" element={<Home />} />

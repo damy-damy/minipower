@@ -1,7 +1,7 @@
 
 import { useMemo } from 'react'
 import {
-  ChevronLeft,
+
   Users,
   UserPlus,
   CheckCircle2,
@@ -47,15 +47,10 @@ export default function Income() {
 
       {/* Fixed Page Header */}
       <header className="shrink-0 w-full bg-[#f0fdf4]">
-        <div className="max-w-md mx-auto px-4 pt-4 pb-3 flex items-center gap-3">
-          <button
-            onClick={() => window.history.back()}
-            className="w-9 h-9 shrink-0 rounded-xl border border-emerald-100 bg-emerald-50 text-emerald-800 flex items-center justify-center"
-          >
-            <ChevronLeft size={20} />
-          </button>
+        <div className="max-w-md mx-auto px-4 pt-4 pb-3 flex items-center px-10">
 
-          <h1 className="text-base font-bold text-emerald-950">
+
+          <h1 className="text-center font-black leading-tight text-[#1a3300] text-[32px]">
             VIP Salary Center
           </h1>
         </div>
